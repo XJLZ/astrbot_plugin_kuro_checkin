@@ -394,8 +394,9 @@ class KuroCheckinPlugin(Star):
             self._auto_task.cancel()
             try:
                 await self._auto_task
-            except Exception:
+            except (asyncio.CancelledError, Exception):
                 pass
+            self._auto_task = None
 
     # ------------------------------------------------------------------
     # 配置辅助
